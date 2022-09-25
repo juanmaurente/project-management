@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jrp.pma.entities.Project;
 
+//Note @Controller is not the same than @RestController
 @Controller
 @RequestMapping("/projects")
 public class ProjectController {
