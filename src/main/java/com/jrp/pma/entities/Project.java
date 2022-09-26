@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+//This entity anotation says to jpa to create this as  table
 @Entity
 public class Project {
 	
