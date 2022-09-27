@@ -7,32 +7,32 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jrp.pma.dao.ProjectRepository;
-import com.jrp.pma.entities.Project;
+import com.jrp.pma.dao.EmployeeRepository;
+import com.jrp.pma.entities.Employee;
 
 //Note @Controller is not the same than @RestController
 @Controller
-@RequestMapping("/projects")
-public class ProjectController {
+@RequestMapping("/employees")
+public class EmployeeController {
 
 	// we give spring container to inject an instance of the interface repository
 		@Autowired
-		ProjectRepository proRepo;
+		EmployeeRepository empRepo;
 	
 	@GetMapping("/new")
-	public String displayProjectForm(Model model) {
+	public String displayEmployeeForm(Model model) {
 		
-		Project aProject = new Project();
-		model.addAttribute("project", aProject);
-		return "new-project";
+		Employee aEmployee = new Employee();
+		model.addAttribute("employee", aEmployee);
+		return "new-employee";
 	}
 	
 	@PostMapping("/save")
-	public String createProject(Project project, Model model) {
-		proRepo.save(project);
+	public String createEmployee(Employee employee, Model model) {
+		empRepo.save(employee);
 		
-		//use a redirect to prevent duplicate submissions
-		return "redirect:/projects/new";
+		//use a redirect to prevent duplicate submissions 
+		return "redirect:/employees/new";
 	}
 	
 	
