@@ -16,25 +16,27 @@ import com.jrp.pma.entities.Employee;
 public class EmployeeController {
 
 	// we give spring container to inject an instance of the interface repository
-		@Autowired
-		EmployeeRepository empRepo;
-	
+	@Autowired
+	EmployeeRepository empRepo;
+
 	@GetMapping("/new")
 	public String displayEmployeeForm(Model model) {
-		
-		Employee aEmployee = new Employee();
-		model.addAttribute("employee", aEmployee);
+
+		Employee anEmployee = new Employee();
+		model.addAttribute("employee", anEmployee);
 		return "new-employee";
 	}
-	
+
 	@PostMapping("/save")
 	public String createEmployee(Employee employee, Model model) {
+
+		// So far we have the form binding complete, now we need to communicate with the
+		// database..that's why
+		// we do a Crud Repository
 		empRepo.save(employee);
-		
-		//use a redirect to prevent duplicate submissions 
+
+		// use a redirect to prevent duplicate submissions
 		return "redirect:/employees/new";
 	}
-	
-	
-	
+
 }
