@@ -1,9 +1,15 @@
 package com.jrp.pma.dao;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import com.jrp.pma.entities.Project;
 
 public interface ProjectRepository extends CrudRepository<Project, Long> {
 
+	//CrudRepository has a findAll() but returns an Iterable<T>. So we need to define
+	// our own method that returns a List<Project>
+	@Override
+	public List<Project> findAll();
 }
