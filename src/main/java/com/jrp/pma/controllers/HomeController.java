@@ -26,6 +26,8 @@ public class HomeController {
 	@GetMapping("/")
 	public String displayHome(Model model) {
 		
+		//remember we use Model object to send/receive data from the view
+		
 		//bring all projects that are in the db. it complains because cannot convert from 	
 		List<Project> projects = proRepo.findAll();
 		
@@ -36,6 +38,6 @@ public class HomeController {
 		List<Employee> employees = empRepo.findAll();
 		model.addAttribute("employeesList", employees);
 		
-		return "home";
+		return "main/home";
 	}
 }
