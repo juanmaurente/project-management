@@ -1,5 +1,7 @@
 package com.jrp.pma.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jrp.pma.dao.EmployeeRepository;
 import com.jrp.pma.entities.Employee;
+import com.jrp.pma.entities.Project;
 
 //Note @Controller is not the same than @RestController
 @Controller
@@ -39,6 +42,16 @@ public class EmployeeController {
 
 		// use a redirect to prevent duplicate submissions
 		return "redirect:/employees/new";
+	}
+	
+	@GetMapping("")
+	public String displayEmployeeList(Model model) {
+	
+		//remember we use Model object to send/receive data from the view
+		List<Employee> employees = empRepo.findAll();
+		model.addAttribute("employeesList", employees);
+		
+		return "employees/list-employees";
 	}
 
 }
