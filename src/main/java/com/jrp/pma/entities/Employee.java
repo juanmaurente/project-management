@@ -1,12 +1,13 @@
 package com.jrp.pma.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Employee {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long employeeId;
 	
 	private String firstName;
@@ -14,10 +15,12 @@ public class Employee {
 	private String email;
 
 
-	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
-				fetch = FetchType.LAZY)
-	@JoinColumn(name="project_id")
-	private Project theProject;
+	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
+			fetch = FetchType.LAZY)
+	@JoinTable(name = "project_employee",
+			joinColumns = @JoinColumn(name="employee_id"),
+			inverseJoinColumns = @JoinColumn(name="project_id"))
+	private List<Project> projects;
 
 
 	
@@ -33,12 +36,12 @@ public class Employee {
 		this.email = email;
 	}
 
-	public Project getTheProject() {
-		return theProject;
+	public List<Project> getProjects() {
+		return projects;
 	}
 
-	public void setTheProject(Project theProject) {
-		this.theProject = theProject;
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
 	}
 
 	public long getEmployeeId() {

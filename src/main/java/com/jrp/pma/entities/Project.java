@@ -1,21 +1,26 @@
 package com.jrp.pma.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-//This entity anotation says to jpa to create this as  table
+//This entity annotation says to jpa to create this as  table
 @Entity
 public class Project {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long projectId;
 	
 	private String name;
 	private String stage;
 	private String description;
 
-	@OneToMany(mappedBy = "theProject")
+	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
+			fetch = FetchType.LAZY)
+	@JoinTable(name = "project_employee",
+				joinColumns = @JoinColumn(name="project_id"),
+				inverseJoinColumns = @JoinColumn(name="employee_id"))
 	private List<Employee> employees;
 
 	
@@ -63,5 +68,10 @@ public class Project {
 		this.description = description;
 	}
 	
-	
+	public void addEmployee(Employee emp){
+		if(employees==null){
+			employees = new ArrayList<>();
+		}
+		employees.add(emp);
+	}
 }
