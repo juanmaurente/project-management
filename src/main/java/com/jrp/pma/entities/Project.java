@@ -1,9 +1,7 @@
 package com.jrp.pma.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 //This entity anotation says to jpa to create this as  table
 @Entity
@@ -16,6 +14,10 @@ public class Project {
 	private String name;
 	private String stage;
 	private String description;
+
+	@OneToMany(mappedBy = "theProject")
+	private List<Employee> employees;
+
 	
 	public Project() {
 		
@@ -27,6 +29,15 @@ public class Project {
 		this.stage = stage;
 		this.description = description;
 	}
+
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
+	}
+
 	public long getProjectId() {
 		return projectId;
 	}

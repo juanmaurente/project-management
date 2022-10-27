@@ -1,9 +1,6 @@
 package com.jrp.pma.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Employee {
@@ -15,7 +12,14 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private String email;
-	
+
+
+	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST},
+				fetch = FetchType.LAZY)
+	@JoinColumn(name="project_id")
+	private Project theProject;
+
+
 	
 	//As we are going to create a form for an employee to enter their data, so I'll need an empty object
 	public Employee() {
@@ -28,6 +32,15 @@ public class Employee {
 		this.lastName = lastName;
 		this.email = email;
 	}
+
+	public Project getTheProject() {
+		return theProject;
+	}
+
+	public void setTheProject(Project theProject) {
+		this.theProject = theProject;
+	}
+
 	public long getEmployeeId() {
 		return employeeId;
 	}

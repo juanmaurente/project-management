@@ -43,12 +43,14 @@
 		<tr>
 			<th>First Name</th>
 			<th>Last Name</th>
+			<th>Email</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr th:each="anEmployee : ${employeesList} ">
 			<td th:text="${anEmployee.firstName}">
 			<td th:text="${anEmployee.lastName}">
+			<td th:text="${anEmployee.email}">
 		</tr>
 	</tbody>
 </table>
@@ -60,6 +62,7 @@
 		<tr>
 			<th>Project Name</th>
 			<th>Project Stage</th>
+			<th>Description</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -69,6 +72,7 @@
 		<tr th:each="aProject : ${projectsList} ">
 			<td th:text="${aProject.name}">
 			<td th:text="${aProject.stage}">
+			<td th:text="${aProject.description}">
 		</tr>
 	</tbody>
 </table>
