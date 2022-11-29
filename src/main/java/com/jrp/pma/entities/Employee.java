@@ -5,9 +5,8 @@ import java.util.List;
 
 @Entity
 public class Employee {
-
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long employeeId;
 	
 	private String firstName;
